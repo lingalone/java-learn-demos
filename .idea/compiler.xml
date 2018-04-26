@@ -13,7 +13,7 @@
     <bytecodeTargetLevel>
       <module name="java-interest-demos" target="1.5" />
       <module name="java-learn-demos" target="1.5" />
-      <module name="java-muti-thread" target="1.5" />
+      <module name="java-muti-thread" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
