@@ -9,7 +9,7 @@ import java.util.concurrent.Executors;
  *
  * @author <a href="https://github.com/lingalone">lingalone</a>
  * @version 1.0.0
- * @link
+ * @link https://www.jianshu.com/p/8826a459471f
  * @since 2018/4/26
  */
 
