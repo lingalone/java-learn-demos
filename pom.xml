@@ -11,6 +11,7 @@
     <modules>
         <module>java-muti-thread</module>
         <module>java-interest-demos</module>
+        <module>java8-langd-emo</module>
     </modules>
 
 
