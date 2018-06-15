@@ -21,18 +21,20 @@ public class TTFProccess {
 
 
     public void saveTTF(String filePath, TTF ttf) throws IOException {
+        System.out.println(ttf.getTtfHeader().toString());
         ByteArrayOutputStream ttfOutputStream = new ByteArrayOutputStream();
-        ttfOutputStream.write(getBytes((Integer) ttf.getTtfHeader().getSfntVersion()));
+        ttfOutputStream.write(getBytes((int)  ttf.getTtfHeader().getSfntVersion()));
         ttfOutputStream.write(getBytes((short) ttf.getTtfHeader().getNumTables()));
         ttfOutputStream.write(getBytes((short) ttf.getTtfHeader().getSearchRange()));
-        ttfOutputStream.write(getBytes( ttf.getTtfHeader().getEntrySelector()));
-        ttfOutputStream.write(getBytes(ttf.getTtfHeader().getRangeShift()));
+        ttfOutputStream.write(getBytes((short) ttf.getTtfHeader().getEntrySelector()));
+        ttfOutputStream.write(getBytes((short) ttf.getTtfHeader().getRangeShift()));
 
         for (TableRecord tableRecord : ttf.getTableRecords()) {
-            ttfOutputStream.write(getBytes((Integer) tableRecord.getTag()));
-            ttfOutputStream.write(getBytes((Integer) tableRecord.getCheckSum()));
-            ttfOutputStream.write(getBytes((Integer) tableRecord.getOffset()));
-            ttfOutputStream.write(getBytes((Integer) tableRecord.getLength()));
+            System.out.println(tableRecord.toString());
+            ttfOutputStream.write(getBytes((int) tableRecord.getTag()));
+            ttfOutputStream.write(getBytes((int) tableRecord.getCheckSum()));
+            ttfOutputStream.write(getBytes((int) tableRecord.getOffset()));
+            ttfOutputStream.write(getBytes((int) tableRecord.getLength()));
         }
 
         int count = 0;
@@ -49,5 +51,9 @@ public class TTFProccess {
 
     private byte[] getBytes(int i) {
         return ByteBuffer.allocate(4).putInt(i).array();
+    }
+    private byte[] getBytes(short i) {
+        System.out.println(i);
+        return ByteBuffer.allocate(2).putShort(i).array();
     }
 }

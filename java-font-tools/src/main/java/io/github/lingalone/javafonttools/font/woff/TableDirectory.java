@@ -32,6 +32,7 @@ public class TableDirectory {
     private int compLength;
     private int origLength;
     private int origChecksum;
+    private byte[] data;
 
     @Override
     public String toString() {
