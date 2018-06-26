@@ -18,21 +18,27 @@ public class WoffProccessTest {
 
     @Test
     public void createWoff() throws IOException, FontFormatException {
-        WoffProccess woffProccess = new WoffProccess("C:\\Users\\owner\\Downloads\\tyc-num.woff");
+        WoffProccess woffProccess = new WoffProccess("E:\\font\\font_1404888168_2057645.woff");
         System.out.println(woffProccess.getWoff().toString());
 
-        TTFProccess ttfProccess = new TTFProccess();
-        FontSaver.saveTTF("C:\\Users\\owner\\Downloads\\c052136_ISO_IEC_14496-22_2009(E)\\ggg.ttf",FontTransfer.woffToTTF(woffProccess.getWoff()));
-        FontSaver.saveWoff("C:\\Users\\owner\\Downloads\\c052136_ISO_IEC_14496-22_2009(E)\\ggg.woff",woffProccess.getWoff());
 
-        FontImage fontImage = new FontImage();
-        fontImage.setFontFile("C:\\Users\\owner\\Downloads\\c052136_ISO_IEC_14496-22_2009(E)\\ggg.ttf");
-        fontImage.setFontSize(80);
-        fontImage.setImgSize(100);
-        fontImage.setSaveDir("E:\\font");
-        fontImage.setFontKeys(new ArrayList<String>(woffProccess.woff.getGlyphCode().values()));
-        FontToImage.saveFontImageSingle(fontImage);
+//        FontSaver.saveTTF("C:\\Users\\owner\\Downloads\\c052136_ISO_IEC_14496-22_2009(E)\\ggg.ttf",FontTransfer.woffToTTF(woffProccess.getWoff()));
+//        FontSaver.saveWoff("C:\\Users\\owner\\Downloads\\c052136_ISO_IEC_14496-22_2009(E)\\ggg.woff",woffProccess.getWoff());
+//
+//        FontImage fontImage = new FontImage();
+//        fontImage.setFontFile("C:\\Users\\owner\\Downloads\\c052136_ISO_IEC_14496-22_2009(E)\\ggg.ttf");
+//        fontImage.setFontSize(80);
+//        fontImage.setImgSize(100);
+//        fontImage.setSaveDir("E:\\font");
+//        fontImage.setFontKeys(new ArrayList<String>(woffProccess.woff.getGlyphCode().values()));
+//        FontToImage.saveFontImageSingle(fontImage);
 
+    }
+
+
+    @Test
+    public void createTTF(){
+        TTFProccess ttfProccess = new TTFProccess("E:\\font\\STLITI.TTF");
     }
 
 
@@ -45,7 +51,6 @@ public class WoffProccessTest {
                 System.out.println(subFile.getPath());
                 if(subFile.exists()){
                     WoffProccess woffProccess = new WoffProccess(subFile);
-                    TTFProccess ttfProccess = new TTFProccess();
                     FontSaver.saveTTF("E:\\font\\ttf\\"+subFile.getName()+".ttf", FontTransfer.woffToTTF(woffProccess.getWoff()));
 
 
