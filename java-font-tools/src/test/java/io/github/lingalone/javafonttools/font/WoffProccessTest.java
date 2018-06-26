@@ -22,7 +22,8 @@ public class WoffProccessTest {
         System.out.println(woffProccess.getWoff().toString());
 
         TTFProccess ttfProccess = new TTFProccess();
-        ttfProccess.saveTTF("C:\\Users\\owner\\Downloads\\c052136_ISO_IEC_14496-22_2009(E)\\ggg.ttf",FontTransfer.woffToTTF(woffProccess.getWoff()));
+        FontSaver.saveTTF("C:\\Users\\owner\\Downloads\\c052136_ISO_IEC_14496-22_2009(E)\\ggg.ttf",FontTransfer.woffToTTF(woffProccess.getWoff()));
+        FontSaver.saveWoff("C:\\Users\\owner\\Downloads\\c052136_ISO_IEC_14496-22_2009(E)\\ggg.woff",woffProccess.getWoff());
 
         FontImage fontImage = new FontImage();
         fontImage.setFontFile("C:\\Users\\owner\\Downloads\\c052136_ISO_IEC_14496-22_2009(E)\\ggg.ttf");
@@ -45,14 +46,14 @@ public class WoffProccessTest {
                 if(subFile.exists()){
                     WoffProccess woffProccess = new WoffProccess(subFile);
                     TTFProccess ttfProccess = new TTFProccess();
-                    ttfProccess.saveTTF("E:\\font\\ttf\\"+subFile.getName()+".ttf", FontTransfer.woffToTTF(woffProccess.getWoff()));
+                    FontSaver.saveTTF("E:\\font\\ttf\\"+subFile.getName()+".ttf", FontTransfer.woffToTTF(woffProccess.getWoff()));
 
 
                     FontImage fontImage = new FontImage();
                     fontImage.setFontFile("E:\\font\\ttf\\"+subFile.getName()+".ttf");
                     fontImage.setFontSize(80);
                     fontImage.setImgSize(100);
-                    fontImage.setSaveDir("E:\\font");
+                    fontImage.setSaveDir("E:\\font\\img");
                     fontImage.setFontKeys(new ArrayList<String>(woffProccess.woff.getGlyphCode().values()));
                     FontToImage.saveFontImageSingle(fontImage);
                 }

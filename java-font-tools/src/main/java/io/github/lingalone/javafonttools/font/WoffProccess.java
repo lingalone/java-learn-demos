@@ -140,6 +140,7 @@ public class WoffProccess {
         int readOffset = woff.getTableDirectoriesOffset();
 
         List<byte[]> tableData = new ArrayList<>();
+        List<byte[]> compTableData = new ArrayList<>();
         Map<Integer, String> glyphCode = new HashMap<>();
         dataInputStream.skip(readOffset);
         for(TableDirectory directory : woff.getTableDirectories()){
@@ -169,20 +170,40 @@ public class WoffProccess {
                 glyphCode = temp;
             }
 
-            ByteArrayOutputStream ttfOutputStream = new ByteArrayOutputStream();
-            ttfOutputStream.write(inflatedFontData);
-            int offset = directory.getOffset() + directory.getOrigLength();
-            int padding = 0;
-            if (offset % 4 != 0)
-                padding = 4 - (offset % 4);
-            ttfOutputStream.write(getBytes(0), 0, padding);
-            tableData.add(ttfOutputStream.toByteArray());
-            ttfOutputStream.close();
+//            ByteArrayOutputStream ttfOutputStream = new ByteArrayOutputStream();
+//            ttfOutputStream.write(inflatedFontData);
+//            int offset = directory.getOffset() + directory.getOrigLength();
+//            int padding = 0;
+//            if (offset % 4 != 0)
+//                padding = 4 - (offset % 4);
+//            ttfOutputStream.write(getBytes(0), 0, padding);
+//            tableData.add(ttfOutputStream.toByteArray());
+//            ttfOutputStream.close();
+
+            tableData.add(fill(inflatedFontData));
+            compTableData.add(fill(fontData));
+
+
 
         }
         woff.setGlyphCode(glyphCode);
         woff.setTableData(tableData);
+        woff.setCompTableData(compTableData);
         return glyphCode;
+    }
+
+
+    private byte[] fill(byte[] fontData) throws IOException {
+        ByteArrayOutputStream ttfOutputStream = new ByteArrayOutputStream();
+        ttfOutputStream.write(fontData);
+        int padding = 0;
+        if (fontData.length % 4 != 0)
+            padding = 4 - (fontData.length % 4);
+        ttfOutputStream.write(getBytes(0), 0, padding);
+
+        byte[] res = ttfOutputStream.toByteArray();
+        ttfOutputStream.close();
+        return res;
     }
 
     private byte[] getBytes(int i) {

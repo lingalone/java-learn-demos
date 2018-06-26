@@ -26,6 +26,7 @@ public class Woff {
     private int                     woffHeaderOffset;
     private List<TableDirectory>    tableDirectories;
     private List<byte[]>            tableData;
+    private List<byte[]>            compTableData;
     private int                     tableDirectoriesOffset;
     private int                     tableNum;
     private Map<Integer, String>    glyphCode;
