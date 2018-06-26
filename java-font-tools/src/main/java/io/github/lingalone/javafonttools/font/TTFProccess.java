@@ -40,12 +40,9 @@ public class TTFProccess {
         int count = 0;
         for (byte[] data : ttf.getTableData()){
             ttfOutputStream.write(data);
-            ttfOutputStream.write(getBytes(0), 0, ttf.getTableRecords().get(count).getPadding());
         }
-
-        byte[] ttfByteArray = ttfOutputStream.toByteArray();
         FileOutputStream stream = new FileOutputStream(new File(filePath));
-        stream.write(ttfByteArray);
+        stream.write(ttfOutputStream.toByteArray());
         stream.close();
     }
 

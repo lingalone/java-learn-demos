@@ -6,6 +6,7 @@ import io.github.lingalone.javafonttools.font.woff.WoffHeader;
 import org.apache.commons.io.IOUtils;
 
 import java.io.*;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -154,18 +155,37 @@ public class WoffProccess {
 
             inflatedFontData = inflateFontData(directory.getCompLength(),
                     directory.getOrigLength(), fontData, inflatedFontData);
-            tableData.add(inflatedFontData);
+            System.out.println(inflatedFontData.length);
 
             Map<Integer, String> temp = getMap(inflatedFontData);
             if(temp!=null){
                 glyphCode = temp;
             }
 
+            ByteArrayOutputStream ttfOutputStream = new ByteArrayOutputStream();
+            ttfOutputStream.write(inflatedFontData);
+            int offset = directory.getOffset() + directory.getOrigLength();
+            int padding = 0;
+            if (offset % 4 != 0)
+                padding = 4 - (offset % 4);
+            ttfOutputStream.write(getBytes(0), 0, padding);
+            tableData.add(ttfOutputStream.toByteArray());
+            ttfOutputStream.close();
+
         }
         woff.setGlyphCode(glyphCode);
         woff.setTableData(tableData);
         return glyphCode;
     }
+
+    private byte[] getBytes(int i) {
+        return ByteBuffer.allocate(4).putInt(i).array();
+    }
+
+    private byte[] getBytes(short h) {
+        return ByteBuffer.allocate(2).putShort(h).array();
+    }
+
 
     private byte[] inflateFontData(int compressedLength, int origLength,
                                    byte[] fontData, byte[] inflatedFontData) {
