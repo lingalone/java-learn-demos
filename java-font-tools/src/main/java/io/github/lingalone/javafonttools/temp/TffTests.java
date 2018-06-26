@@ -1,6 +1,6 @@
 package io.github.lingalone.javafonttools.temp;
 
-import org.junit.Test;
+
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -250,7 +250,7 @@ public class TffTests {
 
 
 
-    @Test
+//    @Test
     public void dddd() throws IOException, DataFormatException {
         String wName = "C:\\Users\\owner\\Downloads\\tyc-num.woff";
         String tName = "C:\\Users\\owner\\Downloads\\tyc-num-self.ttf";
