@@ -1,4 +1,4 @@
-package io.github.lingalone.javafonttools.font;
+package io.github.lingalone.javafonttools.font.ttf;
 
 import io.github.lingalone.javafonttools.font.ttf.TTFHeader;
 import io.github.lingalone.javafonttools.font.ttf.TableRecord;

@@ -1,10 +1,11 @@
 package io.github.lingalone.javafonttools.font;
 
+import io.github.lingalone.javafonttools.font.ttf.TTF;
 import io.github.lingalone.javafonttools.font.ttf.TTFHeader;
 import io.github.lingalone.javafonttools.font.ttf.TableRecord;
 import io.github.lingalone.javafonttools.font.woff.TableDirectory;
+import io.github.lingalone.javafonttools.font.woff.Woff;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,11 +60,8 @@ public class FontTransfer {
             tableRecord.setCheckSum(directory.getOrigChecksum());
             tableRecord.setLength(directory.getOrigLength());
             tableRecord.setOffset(offset);
-
             //
             byte [] data = woff.getTableData().get(count);
-
-
 
             offset += directory.getOrigLength();
             int padding = 0;
@@ -75,7 +73,6 @@ public class FontTransfer {
 
             tableRecords.add(tableRecord);
             tableData.add(data);
-
             count++;
         }
         ttf.setTableRecords(tableRecords);
@@ -86,21 +83,7 @@ public class FontTransfer {
 
     }
 
-//    static byte[] merge(byte[] list, int padding){
-//        int size = list.length + padding*4;
-//
-//        byte[] res = new byte[size];
-//
-//        for (int i = 0; i < size; i++) {
-//
-//            if(i >= list.length){
-//                res[i] = 0;
-//            }else {
-//                res[i] = list[i];
-//            }
-//        }
-//        return res;
-//    }
+
 
 
 

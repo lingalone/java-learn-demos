@@ -2,6 +2,7 @@ package io.github.lingalone.javafonttools.font;
 
 import io.github.lingalone.javafonttools.font.woff.InvalidFontException;
 import io.github.lingalone.javafonttools.font.woff.TableDirectory;
+import io.github.lingalone.javafonttools.font.woff.Woff;
 import io.github.lingalone.javafonttools.font.woff.WoffHeader;
 import org.apache.commons.io.IOUtils;
 
@@ -27,14 +28,6 @@ public class WoffProccess {
 
 
     Woff woff = new Woff();
-//    private int woffHeaderOffset = 0;
-//    private int tableDirectoriesOffset = 0;
-//    private int numTables = 0;
-//
-//    private int offset;
-//
-//    private byte[] woffFile;
-
 
     public WoffProccess(String woffPath) {
         try {
@@ -48,6 +41,20 @@ public class WoffProccess {
 
         }
     }
+
+    public WoffProccess(File file) {
+        try {
+
+            byte[] woffFile = IOUtils.toByteArray(new FileInputStream(file));
+            woff.setFontFile(woffFile);
+            this.getWoffHeader();
+            this.getTableDirectories();
+            this.getGlyphCode();
+        } catch (IOException e) {
+
+        }
+    }
+
 
     public Woff getWoff() {
         return woff;

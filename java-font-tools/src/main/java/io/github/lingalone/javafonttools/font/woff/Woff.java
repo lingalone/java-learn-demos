@@ -1,4 +1,4 @@
-package io.github.lingalone.javafonttools.font;
+package io.github.lingalone.javafonttools.font.woff;
 
 
 import io.github.lingalone.javafonttools.font.woff.TableDirectory;
