@@ -1,5 +1,6 @@
 package io.github.lingalone.javafonttools.font;
 
+import io.github.lingalone.javafonttools.font.opentype.Cmap;
 import io.github.lingalone.javafonttools.font.ttf.TTF;
 import io.github.lingalone.javafonttools.font.ttf.TTFHeader;
 import io.github.lingalone.javafonttools.font.ttf.TableRecord;
@@ -28,6 +29,10 @@ public class TTFProccess {
 
     TTF ttf = new TTF();
 
+    public TTF getTtf() {
+        return ttf;
+    }
+
     public TTFProccess(String woffPath) {
         try {
 
@@ -36,6 +41,7 @@ public class TTFProccess {
             this.getTTFHeader();
             this.getTableRecords();
             this.getGlyphCode();
+
         } catch (IOException e) {
 
         }
@@ -98,44 +104,39 @@ public class TTFProccess {
         List<byte[]> tableData = new ArrayList<>();
         Map<Integer, String> glyphCode = new HashMap<>();
         dataInputStream.skip(readOffset);
-        for(TableRecord record : ttf.getTableRecords()){
-            System.out.println(record.getOffset());
-            System.out.println(record.toString());
-            int skipBytes = record.getOffset() - readOffset;
-            if (skipBytes > 0)
-                dataInputStream.skip(skipBytes);
-            readOffset += skipBytes;
+        try {
+            for(TableRecord record : ttf.getTableRecords()){
+                dataInputStream = new DataInputStream(new ByteArrayInputStream(ttf.getFontFile()));
 
-            byte[] fontData = new byte[record.getLength()];
-            int readBytes = 0;
-            while (readBytes < record.getLength()) {
-                readBytes += dataInputStream.read(fontData, readBytes,
-                        record.getLength() - readBytes);
+                System.out.println(record.getOffset());
+                System.out.println(record.toString());
+
+                dataInputStream.skipBytes(record.getOffset());
+
+                byte[] fontData = new byte[record.getLength()];
+                int readBytes = 0;
+                while (readBytes < record.getLength()) {
+                    readBytes += dataInputStream.read(fontData, readBytes,
+                            record.getLength() - readBytes);
+                }
+                System.out.println(fontData.length);
+
+                Map<Integer, String> temp = Cmap.getMap(fontData);
+                System.out.println("ddddddddddd-11");
+                System.out.println(temp);
+//            if(temp!=null && temp.size()>1){
+//                glyphCode = temp;
+//            }
+                tableData.add(fill(fontData));
             }
-            System.out.println(fontData.length);
-            readOffset += record.getLength();
-
-
-            Map<Integer, String> temp = getMap(fontData);
-            if(temp!=null){
-                glyphCode = temp;
-            }
-
-//            ByteArrayOutputStream ttfOutputStream = new ByteArrayOutputStream();
-//            ttfOutputStream.write(inflatedFontData);
-//            int offset = directory.getOffset() + directory.getOrigLength();
-//            int padding = 0;
-//            if (offset % 4 != 0)
-//                padding = 4 - (offset % 4);
-//            ttfOutputStream.write(getBytes(0), 0, padding);
-//            tableData.add(ttfOutputStream.toByteArray());
-//            ttfOutputStream.close();
-
-            tableData.add(fill(fontData));
-
-
-
+        }catch (Exception e){
+            System.out.println(e);
         }
+
+
+        System.out.println("ddddddddddd");
+        System.out.println(glyphCode);
+        System.out.println(tableData);
         ttf.setGlyphCode(glyphCode);
         ttf.setTableData(tableData);
         return glyphCode;

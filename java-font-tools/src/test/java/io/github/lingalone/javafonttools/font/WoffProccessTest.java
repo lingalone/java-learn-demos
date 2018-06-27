@@ -18,27 +18,37 @@ public class WoffProccessTest {
 
     @Test
     public void createWoff() throws IOException, FontFormatException {
-        WoffProccess woffProccess = new WoffProccess("E:\\font\\font_1404888168_2057645.woff");
-        System.out.println(woffProccess.getWoff().toString());
+        WoffProccess woffProccess = new WoffProccess("E:\\font\\font_0e90a1ebce5fd09eb6bdc868c97dca8c.woff");
+//        WoffProccess woffProccess = new WoffProccess("E:\\font\\TeXGyreHeros.woff");
+        System.out.println(woffProccess.getWoff().getGlyphCode().toString());
 
 
 //        FontSaver.saveTTF("C:\\Users\\owner\\Downloads\\c052136_ISO_IEC_14496-22_2009(E)\\ggg.ttf",FontTransfer.woffToTTF(woffProccess.getWoff()));
 //        FontSaver.saveWoff("C:\\Users\\owner\\Downloads\\c052136_ISO_IEC_14496-22_2009(E)\\ggg.woff",woffProccess.getWoff());
 //
-//        FontImage fontImage = new FontImage();
-//        fontImage.setFontFile("C:\\Users\\owner\\Downloads\\c052136_ISO_IEC_14496-22_2009(E)\\ggg.ttf");
-//        fontImage.setFontSize(80);
-//        fontImage.setImgSize(100);
-//        fontImage.setSaveDir("E:\\font");
-//        fontImage.setFontKeys(new ArrayList<String>(woffProccess.woff.getGlyphCode().values()));
-//        FontToImage.saveFontImageSingle(fontImage);
+        FontImage fontImage = new FontImage();
+        fontImage.setFontFile("C:\\Users\\owner\\Downloads\\c052136_ISO_IEC_14496-22_2009(E)\\ggg.ttf");
+        fontImage.setFontSize(80);
+        fontImage.setImgSize(100);
+        fontImage.setSaveDir("E:\\font");
+        fontImage.setFontKeys(new ArrayList<String>(woffProccess.woff.getGlyphCode().values()));
+        FontToImage.saveFontImageSingle(fontImage);
 
     }
 
 
     @Test
-    public void createTTF(){
+    public void createTTF() throws IOException, FontFormatException {
         TTFProccess ttfProccess = new TTFProccess("E:\\font\\STLITI.TTF");
+
+        FontImage fontImage = new FontImage();
+        fontImage.setFontFile("E:\\font\\SIMLI.TTF");
+        fontImage.setFontSize(80);
+        fontImage.setImgSize(100);
+        fontImage.setSaveDir("E:\\font\\ggg");
+//        System.out.println(ttfProccess.getTtf());
+//        fontImage.setFontKeys(new ArrayList<String>(ttfProccess.ttf.getGlyphCode().values()));
+//        FontToImage.saveFontImageSingle(fontImage);
     }
 
 

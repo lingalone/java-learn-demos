@@ -1,5 +1,6 @@
 package io.github.lingalone.javafonttools.font;
 
+import io.github.lingalone.javafonttools.font.opentype.Cmap;
 import io.github.lingalone.javafonttools.font.woff.InvalidFontException;
 import io.github.lingalone.javafonttools.font.woff.TableDirectory;
 import io.github.lingalone.javafonttools.font.woff.Woff;
@@ -143,13 +144,13 @@ public class WoffProccess {
         List<byte[]> compTableData = new ArrayList<>();
         Map<Integer, String> glyphCode = new HashMap<>();
         dataInputStream.skip(readOffset);
+
         for(TableDirectory directory : woff.getTableDirectories()){
+
+            dataInputStream = new DataInputStream(new ByteArrayInputStream(woff.getFontFile()));
             System.out.println(directory.getOffset());
             System.out.println(directory.toString());
-            int skipBytes = directory.getOffset() - readOffset;
-            if (skipBytes > 0)
-                dataInputStream.skip(skipBytes);
-            readOffset += skipBytes;
+            dataInputStream.skipBytes(directory.getOffset());
 
             byte[] fontData = new byte[directory.getCompLength()];
             byte[] inflatedFontData = new byte[directory.getOrigLength()];
@@ -159,14 +160,15 @@ public class WoffProccess {
                         directory.getCompLength() - readBytes);
             }
             System.out.println(fontData.length);
-            readOffset += directory.getCompLength();
 
             inflatedFontData = inflateFontData(directory.getCompLength(),
                     directory.getOrigLength(), fontData, inflatedFontData);
             System.out.println(inflatedFontData.length);
+//
+//            Map<Integer, String> temp = getMap(inflatedFontData);
+            Map<Integer, String> temp = Cmap.getMap(inflatedFontData);
 
-            Map<Integer, String> temp = getMap(inflatedFontData);
-            if(temp!=null){
+            if(temp != null && temp.size()>1){
                 glyphCode = temp;
             }
 
