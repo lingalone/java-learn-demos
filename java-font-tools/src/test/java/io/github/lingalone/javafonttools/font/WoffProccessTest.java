@@ -39,16 +39,16 @@ public class WoffProccessTest {
 
     @Test
     public void createTTF() throws IOException, FontFormatException {
-        TTFProccess ttfProccess = new TTFProccess("E:\\font\\STLITI.TTF");
+        TTFProccess ttfProccess = new TTFProccess("E:\\font\\msyh.ttf");
 
         FontImage fontImage = new FontImage();
-        fontImage.setFontFile("E:\\font\\SIMLI.TTF");
+        fontImage.setFontFile("E:\\font\\msyh.ttf");
         fontImage.setFontSize(80);
         fontImage.setImgSize(100);
         fontImage.setSaveDir("E:\\font\\ggg");
-//        System.out.println(ttfProccess.getTtf());
-//        fontImage.setFontKeys(new ArrayList<String>(ttfProccess.ttf.getGlyphCode().values()));
-//        FontToImage.saveFontImageSingle(fontImage);
+        System.out.println(ttfProccess.getTtf());
+        fontImage.setFontKeys(new ArrayList<String>(ttfProccess.ttf.getGlyphCode().values()));
+        FontToImage.saveFontImageSingle(fontImage);
     }
 
 

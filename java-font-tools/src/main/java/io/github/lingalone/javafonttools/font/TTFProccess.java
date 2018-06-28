@@ -121,22 +121,24 @@ public class TTFProccess {
                 }
                 System.out.println(fontData.length);
 
-                Map<Integer, String> temp = Cmap.getMap(fontData);
-                System.out.println("ddddddddddd-11");
-                System.out.println(temp);
-//            if(temp!=null && temp.size()>1){
-//                glyphCode = temp;
-//            }
+                Map<Integer, String> temp;
+                try{
+                    temp = Cmap.getMap(fontData);
+                    if(temp!=null && temp.size()>1){
+                        glyphCode = temp;
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+
+
                 tableData.add(fill(fontData));
             }
         }catch (Exception e){
             System.out.println(e);
         }
 
-
-        System.out.println("ddddddddddd");
-        System.out.println(glyphCode);
-        System.out.println(tableData);
         ttf.setGlyphCode(glyphCode);
         ttf.setTableData(tableData);
         return glyphCode;

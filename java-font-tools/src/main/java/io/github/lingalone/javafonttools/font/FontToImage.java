@@ -52,13 +52,17 @@ public class FontToImage {
                 graphics.setColor(Color.BLACK);
                 graphics.drawString(fontKey, (int) (fontImage.getImgSize() - fw) / 2, (int) (fh - (fontImage.getImgSize() - fh) / 2));
 
-                File imageFile = Paths.get(fontImage.getSaveDir(), fontFile.getName(), fontKey+".png").toFile();
-                if(imageFile.getParentFile().exists())
-                    ImageIO.write(image, "PNG", imageFile);
-                else{
-                    if(imageFile.getParentFile().mkdir()){
+                try {
+                    File imageFile = Paths.get(fontImage.getSaveDir(), fontFile.getName(), fontKey+".png").toFile();
+                    if(imageFile.getParentFile().exists())
                         ImageIO.write(image, "PNG", imageFile);
+                    else{
+                        if(imageFile.getParentFile().mkdir()){
+                            ImageIO.write(image, "PNG", imageFile);
+                        }
                     }
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
             }
         }

@@ -166,26 +166,19 @@ public class WoffProccess {
             System.out.println(inflatedFontData.length);
 //
 //            Map<Integer, String> temp = getMap(inflatedFontData);
-            Map<Integer, String> temp = Cmap.getMap(inflatedFontData);
+            Map<Integer, String> temp;
+            try {
+                temp = Cmap.getMap(inflatedFontData);
 
-            if(temp != null && temp.size()>1){
-                glyphCode = temp;
+                if(temp != null && temp.size()>1){
+                    glyphCode = temp;
+                }
+            }catch (Exception e){
+
             }
-
-//            ByteArrayOutputStream ttfOutputStream = new ByteArrayOutputStream();
-//            ttfOutputStream.write(inflatedFontData);
-//            int offset = directory.getOffset() + directory.getOrigLength();
-//            int padding = 0;
-//            if (offset % 4 != 0)
-//                padding = 4 - (offset % 4);
-//            ttfOutputStream.write(getBytes(0), 0, padding);
-//            tableData.add(ttfOutputStream.toByteArray());
-//            ttfOutputStream.close();
 
             tableData.add(fill(inflatedFontData));
             compTableData.add(fill(fontData));
-
-
 
         }
         woff.setGlyphCode(glyphCode);

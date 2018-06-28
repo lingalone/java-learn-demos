@@ -20,23 +20,23 @@ public class Cmap {
 
     public static Map<Integer,String> getMap(byte [] fontData) throws IOException {
         Map<Integer, String> glyphCode = null;
-        DataInputStream dataInputStream2 = new DataInputStream(new ByteArrayInputStream(fontData));
+        DataInputStream dataInputStream = new DataInputStream(new ByteArrayInputStream(fontData));
 
-        Integer version = dataInputStream2.readUnsignedShort();
-        Integer numTables = dataInputStream2.readUnsignedShort();
+        Integer version = dataInputStream.readUnsignedShort();
+        Integer numTables = dataInputStream.readUnsignedShort();
 
         System.out.println("version   -  "+version);
         if(version==0 && numTables< 14 && numTables > 0){
             System.out.println("numTables -  "+numTables);
 
             for(int i=0;i<numTables;i++) {
-                Integer platformID = dataInputStream2.readUnsignedShort();
-                Integer encodingID = dataInputStream2.readUnsignedShort();
-                Integer offset2 = dataInputStream2.readInt();
+                Integer platformID = dataInputStream.readUnsignedShort();
+                Integer encodingID = dataInputStream.readUnsignedShort();
+                Integer offset = dataInputStream.readInt();
 
                 System.out.println("platformID   -  " + platformID);
                 System.out.println("encodingID   -  " + encodingID);
-                System.out.println("offset       -  " + offset2);
+                System.out.println("offset       -  " + offset);
 
 
                 //format 14  == platform ID 0 and encoding ID 5
@@ -48,19 +48,19 @@ public class Cmap {
 
                 if (platformID == 3 && encodingID == 10){
                     System.out.println("format 12");
-                    glyphCode = format_12(fontData, offset2);
+                    glyphCode = format_12(fontData, offset);
                     if(glyphCode!=null){
                         return glyphCode;
                     }
                 }else if(platformID == 3 && encodingID == 1){
                     System.out.println("format 4");
-                    glyphCode = format_4(fontData, offset2);
+                    glyphCode = format_4(fontData, offset);
                     if(glyphCode!=null){
                         return glyphCode;
                     }
                 }else if(platformID == 0 && encodingID == 5){
                     System.out.println("format 14");
-                    glyphCode = format_14(fontData, offset2);
+                    glyphCode = format_14(fontData, offset);
                     if(glyphCode!=null){
                         return glyphCode;
                     }
@@ -69,7 +69,7 @@ public class Cmap {
             }
 
         }
-        dataInputStream2.close();
+        dataInputStream.close();
         return  null;
     }
 
