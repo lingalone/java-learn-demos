@@ -10,14 +10,16 @@
         <module name="java-font-tools" />
         <module name="java-interest-demos" />
         <module name="java-muti-thread" />
+        <module name="java-netty-demo" />
         <module name="java8-langd-emo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="java-font-tools" target="1.8" />
-      <module name="java-interest-demos" target="1.5" />
+      <module name="java-interest-demos" target="1.8" />
       <module name="java-learn-demos" target="1.5" />
       <module name="java-muti-thread" target="1.8" />
+      <module name="java-netty-demo" target="1.5" />
       <module name="java8-langd-emo" target="1.8" />
     </bytecodeTargetLevel>
   </component>

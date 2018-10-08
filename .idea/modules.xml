@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/java-interest-demos/java-interest-demos.iml" filepath="$PROJECT_DIR$/java-interest-demos/java-interest-demos.iml" />
       <module fileurl="file://$PROJECT_DIR$/java-learn-demos.iml" filepath="$PROJECT_DIR$/java-learn-demos.iml" />
       <module fileurl="file://$PROJECT_DIR$/java-muti-thread/java-muti-thread.iml" filepath="$PROJECT_DIR$/java-muti-thread/java-muti-thread.iml" />
+      <module fileurl="file://$PROJECT_DIR$/java-netty-demo/java-netty-demo.iml" filepath="$PROJECT_DIR$/java-netty-demo/java-netty-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/java8-lang-demo/java8-lang-demo.iml" filepath="$PROJECT_DIR$/java8-lang-demo/java8-lang-demo.iml" />
     </modules>
   </component>
