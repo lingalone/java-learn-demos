@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/inside-java-virtual-machine/inside-java-virtual-machine.iml" filepath="$PROJECT_DIR$/inside-java-virtual-machine/inside-java-virtual-machine.iml" />
       <module fileurl="file://$PROJECT_DIR$/java-font-tools/java-font-tools.iml" filepath="$PROJECT_DIR$/java-font-tools/java-font-tools.iml" />
       <module fileurl="file://$PROJECT_DIR$/java-interest-demos/java-interest-demos.iml" filepath="$PROJECT_DIR$/java-interest-demos/java-interest-demos.iml" />
       <module fileurl="file://$PROJECT_DIR$/java-learn-demos.iml" filepath="$PROJECT_DIR$/java-learn-demos.iml" />
